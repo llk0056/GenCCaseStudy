@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+    <bean class = "org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+        <property value="com.mysql.jdbc.Driver" name="driverClassName"/>
+        <property value="jdbc:mysql://localhost:3306/casestudy?serverTimezone=America/Chicago&amp;useSSL=false" name="url"/>
+        <property name="username" value="root"/>
+        <property value="root" name="password"/>
+    </bean>
+
+
+    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="dao.AuthorDaoDatabase" id="AuthorDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean class="service.AuthorService" id="AuthorService">
+        <constructor-arg ref="AuthorDao"/>
+    </bean>
+
+    <bean class="view.AuthorView" id="Runner"/>
+    <bean class="controller.AuthorController" id="Controller">
+        <constructor-arg ref="Runner"/>
+        <constructor-arg ref="AuthorService"/>
+    </bean>
+</beans>
