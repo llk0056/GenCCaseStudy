@@ -50,4 +50,9 @@ public class AuthorService {
         return dao.findNumBook(name);
     }
 
+    public void addAuthor(String name) { dao.addAuthor(name); }
+
+    public void remAuthor(String name) {
+        dao.remAuthor(name);
+    }
 }

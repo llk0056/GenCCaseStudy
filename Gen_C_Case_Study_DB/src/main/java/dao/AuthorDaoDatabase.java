@@ -42,16 +42,16 @@ public class AuthorDaoDatabase implements AuthorDao {
             = "SELECT Title, Pages, ISBN, Genre " +
             "FROM book " +
             "JOIN author ON AID=BID " +
-            "WHERE name LIKE '%' || ? || '%' ";
+            "WHERE name LIKE ?";
     private static String FIND_BOOKS_BY_GENRE
             = "SELECT Title, Pages, ISBN, Genre " +
             "FROM book " +
-            "WHERE Genre LIKE '%' || ? || '%' ";
+            "WHERE Genre LIKE ?";
 
     private static String FIND_BOOKS_BY_TITLE
             = "SELECT Title, Pages, ISBN, Genre " +
             "FROM book " +
-            "WHERE Title LIKE '%' || ? || '%' ";
+            "WHERE Title LIKE ?";
     private static String FIND_ALL_AUTHORS
             = "SELECT name FROM author";
     private static String FIND_ALL_BOOKS
@@ -63,15 +63,18 @@ public class AuthorDaoDatabase implements AuthorDao {
             "WHERE name LIKE '%' || ? || '%' " +
             "ORDER BY name";
     private static String ADD_NEW_AUTHOR
-            = "INSERT INTO author(name)" +
-            "VALUES (?,?)";
+            = "INSERT INTO author(Name) " +
+            "VALUES (?)";
+    private static String REMOVE_AUTHOR
+            = "DELETE FROM author " +
+            "WHERE name = ?";
 
     public Author getAuthorById(int id) {
         Author p = jdbcTemplate.queryForObject(GET_AUTHOR_BY_ID, new AuthorMapper(), id);
         return p;
     }
     public List<Book> findBooksByAuthor(String name) {
-        List<Book> b = jdbcTemplate.query(FIND_BOOKS_BY_AUTHOR, new BookMapper(), name);
+        List<Book> b = jdbcTemplate.query(FIND_BOOKS_BY_AUTHOR, new BookMapper(), '%' + name + '%');
         return b;
     }
     public List<Author> findAll() {//solution for multiple returns
@@ -87,11 +90,11 @@ public class AuthorDaoDatabase implements AuthorDao {
         return b;
     }
     public List<Book> findBooksByTitle(String title) {
-        List<Book> b = jdbcTemplate.query(FIND_BOOKS_BY_TITLE,  new BookMapper(), title);
+        List<Book> b = jdbcTemplate.query(FIND_BOOKS_BY_TITLE,  new BookMapper(), '%' + title + '%');
         return b;
     }
     public List<Book> findBooksByGenre(String genre) {
-        List<Book> b = jdbcTemplate.query(FIND_BOOKS_BY_GENRE,  new BookMapper(), genre);
+        List<Book> b = jdbcTemplate.query(FIND_BOOKS_BY_GENRE,  new BookMapper(), '%' + genre + '%');
         return b;
     }
     public List<Author> findAuthor() {
@@ -99,13 +102,17 @@ public class AuthorDaoDatabase implements AuthorDao {
         return p;
     }
     public List<Author> findNumBook(String name){
-        List<Author> p = jdbcTemplate.query(FIND_NUM_BOOKS,  new AuthorMapper(), name);
+        List<Author> p = jdbcTemplate.query(FIND_NUM_BOOKS,  new AuthorMapper());
         return p;
     }
 
-    public List<Author> addAuthor(String name){
-        List<Author> p = jdbcTemplate.query(ADD_NEW_AUTHOR,  new AuthorMapper(), name);
-        return p;
+    public void addAuthor(String name){
+        int p = jdbcTemplate.update(ADD_NEW_AUTHOR, name);
+
+    }
+
+    public void remAuthor(String name){
+        int p = jdbcTemplate.update(REMOVE_AUTHOR, name);
     }
 
     private class AuthorMapper implements RowMapper<Author> {

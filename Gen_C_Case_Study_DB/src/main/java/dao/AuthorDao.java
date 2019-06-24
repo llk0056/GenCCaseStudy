@@ -18,6 +18,8 @@ public interface AuthorDao {
     public List<Book> findBooksByTitle(String title);
     public List<Book> findBooksByGenre(String genre);
     public List<Author> findNumBook(String name);
+    public void addAuthor(String name);
+    public void remAuthor(String name);
 
 
 

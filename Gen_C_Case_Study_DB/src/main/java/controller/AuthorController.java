@@ -51,4 +51,10 @@ public class AuthorController {
     }
 
     public List<Author> findNumBook(String name) { return service.findNumBook(name); }
+
+    public void addAuthor(String name) { service.addAuthor(name); }
+
+    public void remAuthor(String name) {
+        service.remAuthor(name);
+    }
 }

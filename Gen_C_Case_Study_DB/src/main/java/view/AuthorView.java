@@ -21,8 +21,9 @@ public class AuthorView implements Runner {
                     "\nEnter 6 to find Books By Author" +
                     "\nEnter 7 to find Books By Title" +
                     "\nEnter 8 to find Books By Genre" +
-                    "\nEnter 9 to find the number of books an author has" +
-                    "\nEnter 10 to Exit");
+                    "\nEnter 9 to Add Author" +
+                    "\nEnter 10 to Remove Author" +
+                    "\nEnter 11 to Exit");
 
                 Scanner option = new Scanner(System.in);
                 while(!option.hasNextInt()) {
@@ -76,12 +77,19 @@ public class AuthorView implements Runner {
                     String name;
                     System.out.println("Enter the Author's name");
                     name = scan.next();
-                    System.out.println(c.findNumBook(name));
+                    c.addAuthor(name);
+                    System.out.println(c.findAuthor());
                     break;
                 case 10:
+                    String name1;
+                    System.out.println("Enter the Author's name");
+                    name1 = scan.next();
+                    c.remAuthor(name1);
+                    System.out.println(c.findAuthor());
+                    break;
+                case 11:
                     System.out.printf("Goodbye");
                     System.exit(0);
-                    break;
             }
         }
 
