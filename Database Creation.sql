@@ -1,0 +1,31 @@
+CREATE DATABASE casestudy;
+USE casestudy;
+CREATE TABLE AUTHOR(
+Name text NOT NULL,
+AID int NOT NULL AUTO_INCREMENT,
+PRIMARY KEY(AID)
+);
+CREATE TABLE BOOK(
+Title text NOT NULL,
+Pages int NOT NULL,
+ISBN text NOT NULL,
+Genre text NOT NULL,
+BID int NOT NULL,
+FOREIGN KEY(BID) references AUTHOR(AID)
+);
+INSERT INTO AUTHOR(Name, AID)
+VALUES('Leroy Ellis', 1);
+INSERT INTO BOOK (Title, Pages, ISBN, GENRE, BID)
+VALUES ('This Book Right Here!', 350, '9988776665522', 'comedy', 1);
+INSERT INTO AUTHOR(Name, AID)
+VALUES('Isa', 2);
+INSERT INTO BOOK (Title, Pages, ISBN, GENRE, BID)
+VALUES ('Decimation', 350, '432423432', 'horror', 2);
+INSERT INTO AUTHOR(Name, AID)
+VALUES('Efe', 3);
+INSERT INTO BOOK (Title, Pages, ISBN, GENRE, BID)
+VALUES ('Mortal Kombat', 350, '764832432', 'horror', 3);
+INSERT INTO AUTHOR(Name, AID)
+VALUES('Alfred', 4);
+INSERT INTO BOOK (Title, Pages, ISBN, GENRE, BID)
+VALUES ('Annihilation', 350, '12314324', 'horror', 4);
