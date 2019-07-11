@@ -5,7 +5,9 @@ import llk0056.dto.Book;
 import llk0056.service.AuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,6 +32,12 @@ public class HomeController {
 		// Adds an object to be used in home.jsp
 		return ret;
 	}
+    @RequestMapping(value="/invalid")
+    public ModelAndView invalid() {
+        ModelAndView ret = new ModelAndView("invalid");//ret = return
+        // Adds an object to be used in home.jsp
+        return ret;
+    }
 
 	@RequestMapping(value="/page1")
 	public ModelAndView page1() {
@@ -82,18 +90,64 @@ public class HomeController {
 	public ModelAndView Search_by_bidView(int BID, Model m){
 		ModelAndView ret = new ModelAndView("sBIDView");
 		List<Book> book = service.getBookById(BID);
-		ret.addObject("searchBID", book);
+		ret.addObject("searchBID", book);//variable used to display
 		m.addAttribute("book", book);
 		return ret;
 	}
 
-	/*@RequestMapping(value="/insertAll")
-	public ModelAndView insertAll(Model m){
-		ModelAndView ret = new ModelAndView("insertAll");
-		String A_name = request.getParameter("first_name");
-		service.addAuthor(A_name);
+	@RequestMapping(value="/find")
+	public ModelAndView find_by_author_name(){
+		ModelAndView ret = new ModelAndView("find");
 		return ret;
-	}*/
+	}
 
+	@RequestMapping(value="/findView")
+	public ModelAndView Find_Books_By_Author(String name, Model m){
+		ModelAndView ret = new ModelAndView("findView");
+		List<Book> book = service.findBooksByAuthor(name);
+		ret.addObject("find", book);//variable used to display
+		m.addAttribute("book", book);
+		return ret;
+	}
+
+
+	@RequestMapping(value="/findBBT")
+	public ModelAndView find_books_by_title(){
+		ModelAndView ret = new ModelAndView("findBBT");
+		return ret;
+	}
+
+	@RequestMapping(value="/findBBTView")
+	public ModelAndView Find_Books_By_Title(String book_title, Model m){
+		ModelAndView ret = new ModelAndView("findBBTView");
+		List<Book> book = service.findBooksByTitle(book_title);
+		ret.addObject("findBookByTitle", book);//variable used to display
+		m.addAttribute("book", book);
+		return ret;
+	}
+
+	@RequestMapping(value="/check")
+	public ModelAndView testCheck(){
+		ModelAndView ret = new ModelAndView("check");
+		return ret;
+	}
+
+	@RequestMapping(value="/insert")
+	public ModelAndView insert(){
+		ModelAndView ret = new ModelAndView("insert");
+
+		//ret.addObject("searchBID", book);
+		//m.addAttribute("book", book);
+		return ret;
+	}
+
+	@RequestMapping(value="/insertView")
+	public ModelAndView testCheckView(String name){
+		ModelAndView ret = new ModelAndView("insertAllView");
+		service.addAuthor(name);
+
+		//return new ModelAndView("redirect:/searchAll");
+		return ret;
+	}
 
 }

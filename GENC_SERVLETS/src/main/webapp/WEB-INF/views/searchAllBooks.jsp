@@ -29,35 +29,7 @@
             text-align: center;
         }
     </style>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">
-            Dewey Decimation
-        </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item" >
-                    <a class="nav-link" href="page1">Main</a>
-                </li>
-                <li class="nav-item" >
-                    <a class="nav-link" href="mj">Nav</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Search
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="sAID">By Author ID</a>
-                        <a class="dropdown-item" href="sBID">By Book ID</a>
-                        <a class="dropdown-item" href="searchAllBooks">List All Books</a>
-                        <a class="dropdown-item" href="searchAll">List All</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <%@include file="navbar.jsp" %>
 </head>
 <body>
 <table >

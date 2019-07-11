@@ -54,7 +54,7 @@ public class AuthorService {
 
     public void addAuthor(String name) { dao.addAuthor(name); }
 
-    public void remAuthor(String name) {
+   /* public void remAuthor(String name) {
         dao.remAuthor(name);
-    }
+    }*/
 }

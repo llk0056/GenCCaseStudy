@@ -20,22 +20,8 @@
         }
     </style>
     <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li>
-                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item" >
-                    <a class="nav-link" href="page1">Main</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="mj">Nav</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js">
         $(document).ready(function(e) {
             var width = $(document).width();
 
@@ -61,6 +47,7 @@
 
 
 <body>
+<%@include file="navbar.jsp" %>
 <div class="container-fluid" style="background-color: black">
     <img id="animate" src="resources/last.gif">
     <div class = "row">
@@ -88,7 +75,6 @@
         </div>
     </div>
 </div>
-
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

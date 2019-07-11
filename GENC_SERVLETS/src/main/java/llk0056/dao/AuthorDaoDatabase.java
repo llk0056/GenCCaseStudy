@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import llk0056.dto.Author;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -33,6 +34,9 @@ public class AuthorDaoDatabase implements llk0056.dao.AuthorDao {
             = "SELECT * "
             + "FROM book "
             + "WHERE BID = ? ";
+    private static String ADD_NEW_AUTHOR
+            = "INSERT INTO author (Name) " +
+            "VALUES (?)";
 
     private static String FIND_ALL
             = "SELECT Name, AID "
@@ -62,15 +66,15 @@ public class AuthorDaoDatabase implements llk0056.dao.AuthorDao {
             "JOIN author ON AID = BID " +
             "WHERE name LIKE '%' || ? || '%' " +
             "ORDER BY name";
-    private static String ADD_NEW_AUTHOR
-            = "INSERT INTO author(Name) " +
-            "VALUES (?)";
-    private static String REMOVE_AUTHOR
-            = "DELETE FROM author " +
-            "WHERE name = ?";
 
-    public
-    llk0056.dto.Author getAuthorById(int id) {
+    /*private static String REMOVE_AUTHOR
+            = "DELETE FROM author " +
+            "WHERE name = ?";*/
+    /* public void remAuthor(String name){
+        int p = jdbcTemplate.update(REMOVE_AUTHOR, name);
+    }*/
+
+    public llk0056.dto.Author getAuthorById(int id) {
         llk0056.dto.Author p = jdbcTemplate.queryForObject(GET_AUTHOR_BY_ID, new AuthorMapper(), id);
         return p;
     }
@@ -112,9 +116,7 @@ public class AuthorDaoDatabase implements llk0056.dao.AuthorDao {
 
     }
 
-    public void remAuthor(String name){
-        int p = jdbcTemplate.update(REMOVE_AUTHOR, name);
-    }
+
 
     private class AuthorMapper implements RowMapper<llk0056.dto.Author> {
 

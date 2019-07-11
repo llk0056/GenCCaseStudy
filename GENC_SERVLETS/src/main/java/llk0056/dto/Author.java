@@ -1,11 +1,13 @@
 package llk0056.dto;
 
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 public class Author {
     private String name;
     private List<Book> book;
+    @Min(value = 1, message = "ID number must be greater than 1")
     private int id;
 
     public Author(){
